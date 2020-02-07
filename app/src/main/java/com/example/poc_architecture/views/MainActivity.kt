@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    // A esta funcion no le des pelota, es para refrescar la vista
     private fun listenerBtn(mode: ViewMode) {
         viewMode = mode
         adapter.onDetachedFromRecyclerView(recycler_view)

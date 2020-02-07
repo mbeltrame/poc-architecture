@@ -1,7 +1,6 @@
 package com.example.poc_architecture.adapters
 
 import android.support.v7.widget.RecyclerView
-import android.util.Log
 import android.view.ViewGroup
 import com.example.poc_architecture.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.dtos.ComponentDTO
