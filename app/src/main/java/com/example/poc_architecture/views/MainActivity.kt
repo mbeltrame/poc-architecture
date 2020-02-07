@@ -6,10 +6,7 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.example.poc_architecture.R
 import com.example.poc_architecture.adapters.ComponentsAdapter
-import com.example.poc_architecture.dtos.AdsComponentDTO
-import com.example.poc_architecture.dtos.CarouselComponentDTO
-import com.example.poc_architecture.dtos.ComponentDTO
-import com.example.poc_architecture.dtos.ItemSearchComponentDTO
+import com.example.poc_architecture.dtos.*
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.*
 import com.example.poc_architecture.utils.ViewType.*
@@ -81,12 +78,18 @@ class MainActivity : AppCompatActivity() {
             components.add(itemSearchComponentDTO)
         }
 
-        for (i in 1..2) {
-            val carouselComponentDTO = CarouselComponentDTO("ITEM CAROUSEL $i")
-            carouselComponentDTO.id = ITEM_CAROUSEL.toString()
-            carouselComponentDTO.state = "VISIBLE"
-            components.add(carouselComponentDTO)
+
+        val itemsCarousel = ArrayList<ItemCarouselComponentDTO>()
+        for (j in 1..4) {
+            val itemCarouselComponentDTO = ItemCarouselComponentDTO("ITEM $j")
+            itemCarouselComponentDTO.state = "VISIBLE"
+            itemsCarousel.add(itemCarouselComponentDTO)
         }
+
+        val carouselComponentDTO = CarouselComponentDTO("CAROUSEL", itemsCarousel)
+        carouselComponentDTO.id = ITEM_CAROUSEL.toString()
+        carouselComponentDTO.state = "VISIBLE"
+        components.add(carouselComponentDTO)
 
         for (i in 1..4) {
             val adsComponentDTO = AdsComponentDTO("ITEM ADS $i")

@@ -9,6 +9,6 @@ class CarouselItemView(private val parent: ViewGroup) {
 
     fun createView(): View {
         return LayoutInflater.from(parent.context)
-            .inflate(R.layout.carousel_list_component_layout, parent, false)
+            .inflate(R.layout.carousel_component_layout, parent, false)
     }
 }
