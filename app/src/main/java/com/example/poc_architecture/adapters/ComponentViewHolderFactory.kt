@@ -5,7 +5,7 @@ import com.example.poc_architecture.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.adapters.viewholders.ads.AdsViewHolder
 import com.example.poc_architecture.adapters.viewholders.ads.state.AdsState
 import com.example.poc_architecture.adapters.viewholders.carousel.CarouselViewHolder
-import com.example.poc_architecture.adapters.viewholders.carousel.state.CarouselState
+import com.example.poc_architecture.adapters.viewholders.carousel.CarouselItemView
 import com.example.poc_architecture.adapters.viewholders.itemSearch.ItemSearchViewHolder
 import com.example.poc_architecture.adapters.viewholders.itemSearch.state.ItemSearchState
 import com.example.poc_architecture.utils.ViewMode
@@ -24,7 +24,7 @@ class ComponentViewHolderFactory {
                     ItemSearchViewHolder(itemView, parent, viewMode)
                 }
                 ITEM_CAROUSEL -> {
-                    val itemView = CarouselState(parent, viewMode).createView()
+                    val itemView = CarouselItemView(parent).createView()
                     CarouselViewHolder(itemView, parent, viewMode)
                 }
                 ITEM_ADS -> {
