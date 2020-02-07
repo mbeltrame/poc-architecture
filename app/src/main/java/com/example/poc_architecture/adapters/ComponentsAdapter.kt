@@ -8,8 +8,7 @@ import com.example.poc_architecture.dtos.ComponentDTO
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewType
 
-class ComponentsAdapter(val viewMode: ViewMode) :
-    RecyclerView.Adapter<ComponentsViewHolder>() {
+class ComponentsAdapter(val viewMode: ViewMode) : RecyclerView.Adapter<ComponentsViewHolder>() {
 
     private var components: List<ComponentDTO>? = null
 
