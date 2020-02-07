@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import android.widget.TextView
 import com.example.poc_architecture.R
 import com.example.poc_architecture.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.adapters.viewholders.carousel.adapter.CarouselAdapter
