@@ -2,6 +2,7 @@ package com.example.poc_architecture.adapters.viewholders.carousel
 
 import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.support.v7.widget.StaggeredGridLayoutManager
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
@@ -16,6 +17,10 @@ class CarouselViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) 
     ComponentsViewHolder(itemView, parent, viewMode) {
 
     private val adapter = CarouselAdapter()
+
+    init {
+        (itemView.layoutParams as StaggeredGridLayoutManager.LayoutParams).isFullSpan = true
+    }
 
     override fun bind(componentDTO: ComponentDTO) {
         val carouselComponentDTO = (componentDTO as CarouselComponentDTO)
