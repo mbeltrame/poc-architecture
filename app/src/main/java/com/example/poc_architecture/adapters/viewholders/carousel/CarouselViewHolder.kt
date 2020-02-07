@@ -1,6 +1,5 @@
 package com.example.poc_architecture.adapters.viewholders.carousel
 
-import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -18,6 +17,5 @@ class CarouselViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) 
 
         val textView = itemView.findViewById<TextView>(R.id.text_carousel)
         textView.text = carouselComponentDTO.text
-        textView.setTextColor(Color.GREEN)
     }
 }

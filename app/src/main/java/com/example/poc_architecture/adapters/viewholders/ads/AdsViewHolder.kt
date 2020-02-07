@@ -1,6 +1,5 @@
 package com.example.poc_architecture.adapters.viewholders.ads
 
-import android.graphics.Color
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -18,6 +17,5 @@ class AdsViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) :
 
         val textView = itemView.findViewById<TextView>(R.id.text_ads)
         textView.text = carouselComponentDTO.text
-        textView.setTextColor(Color.RED)
     }
 }

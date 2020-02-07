@@ -11,9 +11,9 @@ class AdsState(viewGroup: ViewGroup, val viewMode: ViewMode) {
 
     init {
         state = when(viewMode) {
-            GRID -> AdsGridState(viewGroup)
+            GRID -> AdsListState(viewGroup)
             LIST -> AdsListState(viewGroup)
-            GALLERY -> AdsGalleryState(viewGroup)
+            GALLERY -> AdsListState(viewGroup)
         }
     }
 
