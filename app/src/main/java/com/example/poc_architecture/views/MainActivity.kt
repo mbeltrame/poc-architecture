@@ -11,7 +11,6 @@ import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.*
 import kotlinx.android.synthetic.main.activity_main.*
 
-@Suppress("UNREACHABLE_CODE")
 class MainActivity : AppCompatActivity() {
 
     private var viewMode: ViewMode = LIST
