@@ -28,26 +28,22 @@ class MainActivity : AppCompatActivity() {
         adapter.setComponents(components!!)
 
         btn_list.setOnClickListener {
-            viewMode = LIST
-            adapter.onDetachedFromRecyclerView(recycler_view)
-            initializeRecycler()
-            this.components = ComponentsRepository.createComponents()
-            adapter.setComponents(components!!)
+            listenerBtn(LIST)
         }
         btn_gallery.setOnClickListener {
-            viewMode = GALLERY
-            adapter.onDetachedFromRecyclerView(recycler_view)
-            initializeRecycler()
-            this.components = ComponentsRepository.createComponents()
-            adapter.setComponents(components!!)
+            listenerBtn(GALLERY)
         }
         btn_grid.setOnClickListener {
-            viewMode = GRID
-            adapter.onDetachedFromRecyclerView(recycler_view)
-            initializeRecycler()
-            this.components = ComponentsRepository.createComponents()
-            adapter.setComponents(components!!)
+            listenerBtn(GRID)
         }
+    }
+
+    private fun listenerBtn(mode: ViewMode) {
+        viewMode = mode
+        adapter.onDetachedFromRecyclerView(recycler_view)
+        initializeRecycler()
+        this.components = ComponentsRepository.createComponents()
+        adapter.setComponents(components!!)
     }
 
     private fun initializeRecycler() {
