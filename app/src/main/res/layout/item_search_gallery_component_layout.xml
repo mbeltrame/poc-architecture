@@ -1,39 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:layout_margin="10dp"
+    android:backgroundTint="@color/background_item_search"
+    app:cardCornerRadius="5dp"
+    app:elevation="5dp">
 
-    <android.support.v7.widget.CardView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:backgroundTint="@color/background_item_search"
-        app:cardCornerRadius="5dp"
-        app:elevation="5dp">
+        android:gravity="center"
+        android:orientation="vertical">
 
-        <LinearLayout
+        <View
             android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:layout_margin="12dp"
+            android:background="@color/background_image" />
+
+        <TextView
+            android:id="@+id/text_item_search"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:orientation="vertical">
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="12dp"
-                android:background="@color/background_image" />
-
-            <TextView
-                android:id="@+id/text_item_search"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:padding="16dp"
-                android:textColor="@android:color/white"
-                tools:text="GALLERY ITEM SEARCH" />
-        </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
+            android:layout_gravity="center"
+            android:padding="16dp"
+            android:textColor="@android:color/white"
+            tools:text="GALLERY ITEM SEARCH" />
+    </LinearLayout>
+</android.support.v7.widget.CardView>
