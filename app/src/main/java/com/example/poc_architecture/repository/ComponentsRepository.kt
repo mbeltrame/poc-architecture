@@ -6,7 +6,7 @@ import com.example.poc_architecture.utils.ViewType.*
 class ComponentsRepository {
 
     companion object {
-        fun createComponents(): List<ComponentDTO> {
+        fun fetchComponents(): List<ComponentDTO> {
             val components = ArrayList<ComponentDTO>()
 
             for (i in 1..4) {

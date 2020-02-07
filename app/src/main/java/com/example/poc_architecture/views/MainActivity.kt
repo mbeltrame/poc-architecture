@@ -6,7 +6,6 @@ import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.StaggeredGridLayoutManager
 import com.example.poc_architecture.R
 import com.example.poc_architecture.adapters.ComponentsAdapter
-import com.example.poc_architecture.dtos.ComponentDTO
 import com.example.poc_architecture.repository.ComponentsRepository
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.*
@@ -17,15 +16,13 @@ class MainActivity : AppCompatActivity() {
 
     private var viewMode: ViewMode = LIST
     private lateinit var adapter: ComponentsAdapter
-    private var components: List<ComponentDTO>? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         initializeRecycler()
-        this.components = ComponentsRepository.createComponents()
-        adapter.setComponents(components!!)
+        adapter.setComponents(ComponentsRepository.fetchComponents())
 
         btn_list.setOnClickListener {
             listenerBtn(LIST)
@@ -42,8 +39,7 @@ class MainActivity : AppCompatActivity() {
         viewMode = mode
         adapter.onDetachedFromRecyclerView(recycler_view)
         initializeRecycler()
-        this.components = ComponentsRepository.createComponents()
-        adapter.setComponents(components!!)
+        adapter.setComponents(ComponentsRepository.fetchComponents())
     }
 
     private fun initializeRecycler() {
