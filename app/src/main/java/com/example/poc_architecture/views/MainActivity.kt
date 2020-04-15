@@ -1,9 +1,9 @@
 package com.example.poc_architecture.views
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.LinearLayoutManager
-import android.support.v7.widget.StaggeredGridLayoutManager
+import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.poc_architecture.R
 import com.example.poc_architecture.adapters.ComponentsAdapter
 import com.example.poc_architecture.repository.ComponentsRepository
@@ -21,25 +21,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         initializeRecycler()
-        adapter.setComponents(ComponentsRepository.fetchComponents())
+        adapter.submitList(ComponentsRepository.fetchComponents())
 
-        btn_list.setOnClickListener {
-            listenerBtn(LIST)
-        }
-        btn_gallery.setOnClickListener {
-            listenerBtn(GALLERY)
-        }
-        btn_grid.setOnClickListener {
-            listenerBtn(GRID)
-        }
+        btn_list.setOnClickListener { listenerBtn(LIST) }
+        btn_gallery.setOnClickListener { listenerBtn(GALLERY) }
+        btn_grid.setOnClickListener { listenerBtn(GRID) }
     }
 
     // A esta funcion no le des pelota, es para refrescar la vista
     private fun listenerBtn(mode: ViewMode) {
         viewMode = mode
-        adapter.onDetachedFromRecyclerView(recycler_view)
         initializeRecycler()
-        adapter.setComponents(ComponentsRepository.fetchComponents())
     }
 
     private fun initializeRecycler() {
@@ -62,5 +54,6 @@ class MainActivity : AppCompatActivity() {
 
         adapter = ComponentsAdapter(viewMode)
         recycler_view?.adapter = adapter
+        adapter.submitList(ComponentsRepository.fetchComponents())
     }
 }

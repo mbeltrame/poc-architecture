@@ -1,43 +1,41 @@
 package com.example.poc_architecture.adapters
 
-import android.support.v7.widget.RecyclerView
 import android.view.ViewGroup
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import com.example.poc_architecture.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.dtos.ComponentDTO
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewType
 
-class ComponentsAdapter(val viewMode: ViewMode) : RecyclerView.Adapter<ComponentsViewHolder>() {
-
-    private var components: List<ComponentDTO>? = null
+class ComponentsAdapter(val viewMode: ViewMode) : ListAdapter<ComponentDTO, ComponentsViewHolder>(REPO_COMPARATOR) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ComponentsViewHolder {
         return ComponentViewHolderFactory.getComponent(parent, viewType, viewMode)
     }
 
-    override fun getItemCount(): Int {
-        return components?.size ?: 0
-    }
-
     override fun onBindViewHolder(viewHolder: ComponentsViewHolder, position: Int) {
-        components?.get(position)?.let {
+        getItem(position)?.let {
             if (it.hasValidState()) {
                 viewHolder.bind(it)
             }
         }
     }
 
-    fun setComponents(components: List<ComponentDTO>) {
-        this.components = components
-        notifyDataSetChanged()
-    }
-
     override fun getItemViewType(position: Int): Int {
-        components?.let {
-            it[position].id?.let { id ->
-                return ViewType.numberById(id)
-            }
+        getItem(position)?.id?.let { id ->
+            return ViewType.numberById(id)
         }
         return 0
+    }
+
+    companion object {
+        private val REPO_COMPARATOR = object : DiffUtil.ItemCallback<ComponentDTO>() {
+            override fun areItemsTheSame(oldItem: ComponentDTO, newItem: ComponentDTO): Boolean =
+                oldItem.id == newItem.id
+
+            override fun areContentsTheSame(oldItem: ComponentDTO, newItem: ComponentDTO): Boolean =
+                oldItem.state == newItem.state
+        }
     }
 }
