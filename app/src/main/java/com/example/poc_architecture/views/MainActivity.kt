@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.poc_architecture.R
-import com.example.poc_architecture.adapters.ComponentsAdapter
+import com.example.poc_architecture.views.adapters.ComponentsAdapter
 import com.example.poc_architecture.repository.ComponentsRepository
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.*

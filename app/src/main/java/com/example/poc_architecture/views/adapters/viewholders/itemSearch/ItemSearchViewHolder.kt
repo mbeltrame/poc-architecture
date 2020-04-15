@@ -1,10 +1,10 @@
-package com.example.poc_architecture.adapters.viewholders.itemSearch
+package com.example.poc_architecture.views.adapters.viewholders.itemSearch
 
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import com.example.poc_architecture.R
-import com.example.poc_architecture.adapters.viewholders.ComponentsViewHolder
+import com.example.poc_architecture.views.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.dtos.ComponentDTO
 import com.example.poc_architecture.dtos.ItemSearchComponentDTO
 import com.example.poc_architecture.utils.ViewMode

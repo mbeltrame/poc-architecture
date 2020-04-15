@@ -1,4 +1,4 @@
-package com.example.poc_architecture.adapters.viewholders.ads.state
+package com.example.poc_architecture.views.adapters.viewholders.ads.state
 
 import android.view.LayoutInflater
 import android.view.View

@@ -1,7 +1,6 @@
-package com.example.poc_architecture.adapters.viewholders.ads.state
+package com.example.poc_architecture.views.adapters.viewholders.ads.state
 
 import android.view.View
-import com.example.poc_architecture.adapters.viewholders.ads.state.AdsState
 import com.example.poc_architecture.utils.ViewMode
 
 interface StateAdsViewHolder {

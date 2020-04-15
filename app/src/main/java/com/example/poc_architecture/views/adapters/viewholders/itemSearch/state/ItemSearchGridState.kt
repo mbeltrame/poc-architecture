@@ -1,4 +1,4 @@
-package com.example.poc_architecture.adapters.viewholders.itemSearch.state
+package com.example.poc_architecture.views.adapters.viewholders.itemSearch.state
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,18 +7,18 @@ import com.example.poc_architecture.R
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.LIST
 
-class ItemSearchGalleryState(private val parent: ViewGroup) :
+class ItemSearchGridState(private val parent: ViewGroup) :
     StateItemSearchViewHolder {
 
     override fun createView(itemSearchState: ItemSearchState, viewMode: ViewMode): View {
 
-        val layout = LayoutInflater.from(parent.context).inflate(R.layout.item_search_gallery_component_layout, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.item_search_grid_component_layout, parent, false)
 
         when (viewMode) {
             LIST -> itemSearchState.setSate(ItemSearchListState(parent))
             else -> itemSearchState.setSate(ItemSearchGalleryState(parent))
         }
 
-        return layout
+        return itemView
     }
 }

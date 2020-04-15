@@ -1,4 +1,4 @@
-package com.example.poc_architecture.adapters.viewholders.carousel.adapter
+package com.example.poc_architecture.views.adapters.viewholders.carousel.adapter
 
 import android.view.LayoutInflater
 import android.view.View

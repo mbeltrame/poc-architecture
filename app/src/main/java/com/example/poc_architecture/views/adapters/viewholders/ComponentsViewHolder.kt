@@ -1,4 +1,4 @@
-package com.example.poc_architecture.adapters.viewholders
+package com.example.poc_architecture.views.adapters.viewholders
 
 import android.view.View
 import android.view.ViewGroup

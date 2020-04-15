@@ -1,9 +1,9 @@
-package com.example.poc_architecture.adapters
+package com.example.poc_architecture.views.adapters
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.example.poc_architecture.adapters.viewholders.ComponentsViewHolder
+import com.example.poc_architecture.views.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.dtos.ComponentDTO
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewType
