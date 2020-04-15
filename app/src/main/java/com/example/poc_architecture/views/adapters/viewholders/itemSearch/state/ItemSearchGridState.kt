@@ -7,7 +7,7 @@ import com.example.poc_architecture.R
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.LIST
 
-class ItemSearchGridState(private val parent: ViewGroup) :
+class ItemSearchGridState(override val parent: ViewGroup) :
     StateItemSearchViewHolder {
 
     override fun createView(itemSearchState: ItemSearchState, viewMode: ViewMode): View {

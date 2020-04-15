@@ -7,7 +7,7 @@ import com.example.poc_architecture.R
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.GRID
 
-class AdsListState(private val parent: ViewGroup) :
+class AdsListState(override val parent: ViewGroup) :
     StateAdsViewHolder {
 
     override fun createView(adsState: AdsState, viewMode: ViewMode): View {

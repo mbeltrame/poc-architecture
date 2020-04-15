@@ -7,7 +7,7 @@ import com.example.poc_architecture.R
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.LIST
 
-class ItemSearchGalleryState(private val parent: ViewGroup) :
+class ItemSearchGalleryState(override val parent: ViewGroup) :
     StateItemSearchViewHolder {
 
     override fun createView(itemSearchState: ItemSearchState, viewMode: ViewMode): View {

@@ -7,7 +7,7 @@ import com.example.poc_architecture.R
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.utils.ViewMode.LIST
 
-class AdsGalleryState(private val parent: ViewGroup) :
+class AdsGalleryState(override val parent: ViewGroup) :
     StateAdsViewHolder {
 
     override fun createView(adsState: AdsState, viewMode: ViewMode): View {
