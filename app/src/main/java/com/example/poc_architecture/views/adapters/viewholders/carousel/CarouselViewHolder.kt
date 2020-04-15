@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.poc_architecture.R
 import com.example.poc_architecture.views.adapters.viewholders.ComponentsViewHolder
 import com.example.poc_architecture.views.adapters.viewholders.carousel.adapter.CarouselAdapter
-import com.example.poc_architecture.dtos.CarouselComponentDTO
-import com.example.poc_architecture.dtos.ComponentDTO
+import com.example.poc_architecture.models.CarouselComponentDTO
+import com.example.poc_architecture.models.ComponentDTO
 import com.example.poc_architecture.utils.ViewMode
 
 class CarouselViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) :

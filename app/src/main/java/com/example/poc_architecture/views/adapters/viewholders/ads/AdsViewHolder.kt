@@ -5,8 +5,8 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.example.poc_architecture.R
 import com.example.poc_architecture.views.adapters.viewholders.ComponentsViewHolder
-import com.example.poc_architecture.dtos.AdsComponentDTO
-import com.example.poc_architecture.dtos.ComponentDTO
+import com.example.poc_architecture.models.AdsComponentDTO
+import com.example.poc_architecture.models.ComponentDTO
 import com.example.poc_architecture.utils.ViewMode
 
 class AdsViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) :

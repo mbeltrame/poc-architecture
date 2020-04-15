@@ -1,4 +1,4 @@
-package com.example.poc_architecture.dtos
+package com.example.poc_architecture.models
 
 abstract class ComponentDTO(var id: String? = null, var state: String? = null) {
 

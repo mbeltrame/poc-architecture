@@ -1,6 +1,6 @@
 package com.example.poc_architecture.repository
 
-import com.example.poc_architecture.dtos.*
+import com.example.poc_architecture.models.*
 import com.example.poc_architecture.utils.ViewType.*
 
 class ComponentsRepository {

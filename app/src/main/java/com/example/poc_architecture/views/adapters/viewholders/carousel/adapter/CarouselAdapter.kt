@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.poc_architecture.R
-import com.example.poc_architecture.dtos.ItemCarouselComponentDTO
+import com.example.poc_architecture.models.ItemCarouselComponentDTO
 
 class CarouselAdapter : ListAdapter<ItemCarouselComponentDTO, CarouselAdapter.ViewHolder>(COMPARATOR) {
 
