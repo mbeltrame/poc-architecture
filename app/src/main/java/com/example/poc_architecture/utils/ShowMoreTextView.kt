@@ -69,7 +69,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                     }
                     var newText = showingText.substring(
                         0,
-                        showingText.length - (THREE_DOTS.length + textShowMore.length)
+                        showingText.length - (THREE_DOTS.length + textShowMore.length + MAGIC_NUMBER)
                     )
                     newText += THREE_DOTS + textShowMore
                     text = newText
@@ -96,9 +96,8 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                     iCallbackShowMore?.onClickSeeMore(position)
                 }
             },
-            text.length - (THREE_DOTS.length + textShowMore.length),
-            text.length, 0
-        )
+            text.length - (textShowMore.length),
+            text.length, 0)
         movementMethod = LinkMovementMethod.getInstance()
         setText(spannableString, BufferType.SPANNABLE)
     }
@@ -127,6 +126,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
 
     companion object {
         private const val DEFAULT_AMOUNT_LINES = 1
-        private const val THREE_DOTS = "..."
+        private const val MAGIC_NUMBER = 5
+        private const val THREE_DOTS = "... "
     }
 }
