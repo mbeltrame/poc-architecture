@@ -96,7 +96,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                     iCallbackShowMore?.onClickSeeMore(position)
                 }
             },
-            text.length - (textShowMore.length),
+            text.length - textShowMore.length,
             text.length, 0)
         movementMethod = LinkMovementMethod.getInstance()
         setText(spannableString, BufferType.SPANNABLE)
