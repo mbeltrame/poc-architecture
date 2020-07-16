@@ -12,7 +12,7 @@ import com.example.poc_architecture.utils.ViewMode
 class AdsViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) :
     ComponentsViewHolder(itemView, parent, viewMode) {
 
-    override fun bind(componentDTO: ComponentDTO) {
+    override fun bind(componentDTO: ComponentDTO, position: Int?) {
         val carouselComponentDTO = (componentDTO as AdsComponentDTO)
 
         val textView = itemView.findViewById<TextView>(R.id.text_ads)

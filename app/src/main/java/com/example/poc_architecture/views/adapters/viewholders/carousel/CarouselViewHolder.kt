@@ -24,7 +24,7 @@ class CarouselViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode) 
         recyclerView.adapter = adapter
     }
 
-    override fun bind(componentDTO: ComponentDTO) {
+    override fun bind(componentDTO: ComponentDTO, position: Int?) {
         val carouselComponentDTO = (componentDTO as CarouselComponentDTO)
         adapter.submitList(carouselComponentDTO.itemsCarousel)
     }

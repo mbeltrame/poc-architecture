@@ -10,5 +10,5 @@ import com.example.poc_architecture.utils.ViewMode.LIST
 abstract class ComponentsViewHolder(itemView: View, parent: ViewGroup, viewMode: ViewMode = LIST) :
     RecyclerView.ViewHolder(itemView) {
 
-    abstract fun bind(componentDTO: ComponentDTO)
+    abstract fun bind(componentDTO: ComponentDTO, position: Int? = null)
 }
