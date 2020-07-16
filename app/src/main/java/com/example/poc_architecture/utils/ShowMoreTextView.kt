@@ -21,6 +21,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     private var amountLines: Int
     private var textShowMore: String
     private var colorClickableText: Int
+    private var thresholdActivation: Int
 
     var iCallbackShowMore: ICallbackShowMore? = null
     var position: Int? = null
@@ -29,6 +30,8 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     init {
         val typedArray = context.obtainStyledAttributes(attrs, styleable.ShowMoreTextView)
         amountLines = typedArray.getInt(ShowMoreTextView_amountLines, DEFAULT_AMOUNT_LINES)
+        thresholdActivation =
+            typedArray.getInt(ShowMoreTextView_thresholdActivation, DEFAULT_THRESHOLD_ACTIVATION)
         textShowMore = typedArray.getString(ShowMoreTextView_showMoreText) ?: "Show more"
         colorClickableText = typedArray.getColor(
             ShowMoreTextView_colorClickableText,
@@ -67,10 +70,21 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                         showingText += text.substring(start, end)
                         start = end
                     }
-                    var newText = showingText.substring(
-                        0,
-                        showingText.length - (THREE_DOTS.length + textShowMore.length + MAGIC_NUMBER)
-                    )
+
+                    val lengthExtraText =
+                        THREE_DOTS.length + textShowMore.length + thresholdActivation
+                    var cutPosition = showingText.length - lengthExtraText
+
+                    if (cutPosition <= lengthExtraText) {
+                        setExpanded()
+                        viewTreeObserver.removeOnGlobalLayoutListener(this)
+                        return
+                    }
+                    if (cutPosition - 1 > 0 && showingText[cutPosition - 1] == ' ') {
+                        cutPosition -= 1
+                    }
+
+                    var newText = showingText.substring(0, cutPosition)
                     newText += THREE_DOTS + textShowMore
                     text = newText
                     setShowMoreListener()
@@ -97,7 +111,8 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                 }
             },
             text.length - textShowMore.length,
-            text.length, 0)
+            text.length, 0
+        )
         movementMethod = LinkMovementMethod.getInstance()
         setText(spannableString, BufferType.SPANNABLE)
     }
@@ -125,8 +140,8 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     }
 
     companion object {
-        private const val DEFAULT_AMOUNT_LINES = 1
-        private const val MAGIC_NUMBER = 5
+        private const val DEFAULT_AMOUNT_LINES = 2
+        private const val DEFAULT_THRESHOLD_ACTIVATION = 5
         private const val THREE_DOTS = "... "
     }
 }

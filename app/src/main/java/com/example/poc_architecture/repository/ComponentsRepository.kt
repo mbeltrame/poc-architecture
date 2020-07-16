@@ -10,7 +10,7 @@ class ComponentsRepository {
             val components = ArrayList<ComponentDTO>()
 
             for (i in 1..4) {
-                val itemSearchComponentDTO = ItemSearchComponentDTO("ITEM SEACH ALSK D ALSK DLAKS DLAKS DLAKS DLAKS DLAKS DALKSD ALKSD LAKSD DKS DLADKALSKD ALSK $i")
+                val itemSearchComponentDTO = ItemSearchComponentDTO("ITEM SEACH ALSK D ALSK DLAKS DL AKS AKS DL A KS DALKSD ALKSD LAKSD DKS DLADKALSKD ALSK $i")
                 itemSearchComponentDTO.id = ITEM_SEARCH.toString()
                 itemSearchComponentDTO.state = "VISIBLE"
                 components.add(itemSearchComponentDTO)

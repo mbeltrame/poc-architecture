@@ -27,6 +27,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="12dp"
+            app:thresholdActivation="0"
             android:textColor="@android:color/white"
             tools:text="GRID ITEM SEARCH" />
     </LinearLayout>
