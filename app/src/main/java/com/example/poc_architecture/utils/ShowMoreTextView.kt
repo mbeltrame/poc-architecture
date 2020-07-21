@@ -8,7 +8,6 @@ import android.text.style.ClickableSpan
 import android.util.AttributeSet
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver.OnGlobalLayoutListener
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat.getColor
 import com.example.poc_architecture.R
@@ -51,11 +50,20 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     }
 
     private fun addShowMore() {
-        viewTreeObserver.addOnGlobalLayoutListener(object : OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-
+        addOnLayoutChangeListener(object : OnLayoutChangeListener {
+            override fun onLayoutChange(
+                v: View?,
+                left: Int,
+                top: Int,
+                right: Int,
+                bottom: Int,
+                oldLeft: Int,
+                oldTop: Int,
+                oldRight: Int,
+                oldBottom: Int
+            ) {
+                removeOnLayoutChangeListener(this)
                 if (amountLines >= lineCount) {
-                    viewTreeObserver.removeOnGlobalLayoutListener(this)
                     return
                 }
 
@@ -77,7 +85,6 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
 
                     if (cutPosition <= lengthExtraText) {
                         setExpanded()
-                        viewTreeObserver.removeOnGlobalLayoutListener(this)
                         return
                     }
                     if (cutPosition - 1 > 0 && showingText[cutPosition - 1] == ' ') {
@@ -89,7 +96,6 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                     text = newText
                     setShowMoreListener()
                 }
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
             }
         })
     }
