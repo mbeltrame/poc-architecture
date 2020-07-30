@@ -29,6 +29,7 @@ class ItemSearchViewHolder(
         showMore.iCallbackShowMore = iCallbackShowMore
         showMore.text = itemSearchComponentDTO.text
         showMore.position = position
+        showMore.extraText = "17/07/2020"
         showMore.updateView(componentDTO.expanded)
 
         btnUpdate?.setOnClickListener {

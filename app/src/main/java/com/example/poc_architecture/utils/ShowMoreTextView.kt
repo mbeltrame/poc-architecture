@@ -2,6 +2,7 @@ package com.example.poc_architecture.utils
 
 import android.content.Context
 import android.text.SpannableString
+import android.text.SpannableStringBuilder
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
@@ -13,6 +14,7 @@ import androidx.core.content.ContextCompat.getColor
 import com.example.poc_architecture.R
 import com.example.poc_architecture.R.styleable
 import com.example.poc_architecture.R.styleable.*
+import com.example.poc_architecture.utils.TransitionType.CHANGE_BOUNDS
 
 class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
 
@@ -25,6 +27,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     var iCallbackShowMore: ICallbackShowMore? = null
     var position: Int? = null
     var isExpanded: Boolean = true
+    var extraText: String? = null
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, styleable.ShowMoreTextView)
@@ -52,18 +55,14 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     private fun addShowMore() {
         addOnLayoutChangeListener(object : OnLayoutChangeListener {
             override fun onLayoutChange(
-                v: View?,
-                left: Int,
-                top: Int,
-                right: Int,
-                bottom: Int,
-                oldLeft: Int,
-                oldTop: Int,
-                oldRight: Int,
-                oldBottom: Int
+                v: View?, left: Int, top: Int, right: Int, bottom: Int,
+                oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int
             ) {
                 removeOnLayoutChangeListener(this)
                 if (amountLines >= lineCount) {
+                    getSpanExtraText()?.let {
+                        text = SpannableStringBuilder(text).append(it)
+                    }
                     return
                 }
 
@@ -79,8 +78,9 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                         start = end
                     }
 
+                    val sizeExtraText = extraText?.length ?: 0
                     val lengthExtraText =
-                        THREE_DOTS.length + textShowMore.length + thresholdActivation
+                        THREE_DOTS.length + textShowMore.length + thresholdActivation + sizeExtraText
                     var cutPosition = showingText.length - lengthExtraText
 
                     if (cutPosition <= lengthExtraText) {
@@ -101,6 +101,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     }
 
     private fun setShowMoreListener() {
+        val spannableBuilder = SpannableStringBuilder()
         val spannableString = SpannableString(text)
         spannableString.setSpan(
             object : ClickableSpan() {
@@ -112,7 +113,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
                 override fun onClick(view: View?) {
                     setExpanded()
                     val container = parent.parent as? ViewGroup
-                    TransitionUtils.showTransition(container, TransitionType.CHANGE_BOUNDS)
+                    TransitionUtils.showTransition(container, CHANGE_BOUNDS)
                     iCallbackShowMore?.onClickSeeMore(position)
                 }
             },
@@ -120,7 +121,11 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
             text.length, 0
         )
         movementMethod = LinkMovementMethod.getInstance()
-        setText(spannableString, BufferType.SPANNABLE)
+
+        spannableBuilder.append(spannableString)
+        getSpanExtraText()?.let { spannableBuilder.append(it) }
+
+        this@ShowMoreTextView.text = spannableBuilder
     }
 
     private fun setAmountLines() {
@@ -137,6 +142,11 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
         if (mainText.isNotEmpty()) {
             text = mainText
         }
+
+        getSpanExtraText()?.let {
+            val spannableBuilder = SpannableStringBuilder(text).append(it)
+            this@ShowMoreTextView.text = spannableBuilder
+        }
     }
 
     private fun setCollapsed() {
@@ -145,9 +155,18 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
         addShowMore()
     }
 
+    private fun getSpanExtraText(): SpannableStringBuilder? {
+        return extraText?.let {
+            val textSize = context.resources.getDimensionPixelSize(R.dimen.text_size_show_more)
+            val spannableString = SpannableStringBuilder(SPAN_SEPARATOR)
+            spannableString.append(SpannableString(it.toSpannableString(context, textSize)))
+        }
+    }
+
     companion object {
         private const val DEFAULT_AMOUNT_LINES = 2
         private const val DEFAULT_THRESHOLD_ACTIVATION = 5
         private const val THREE_DOTS = "... "
+        private const val SPAN_SEPARATOR = "   "
     }
 }
