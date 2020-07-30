@@ -93,14 +93,13 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
 
                     var newText = showingText.substring(0, cutPosition)
                     newText += THREE_DOTS + textShowMore
-                    text = newText
-                    setShowMoreListener()
+                    text = getSpannableShowMore(newText)
                 }
             }
         })
     }
 
-    private fun setShowMoreListener() {
+    private fun getSpannableShowMore(text: String): SpannableStringBuilder {
         val spannableBuilder = SpannableStringBuilder()
         val spannableString = SpannableString(text)
         spannableString.setSpan(
@@ -125,7 +124,7 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
         spannableBuilder.append(spannableString)
         getSpanExtraText()?.let { spannableBuilder.append(it) }
 
-        this@ShowMoreTextView.text = spannableBuilder
+        return spannableBuilder
     }
 
     private fun setAmountLines() {

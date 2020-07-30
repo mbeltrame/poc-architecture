@@ -3,6 +3,8 @@ package com.example.poc_architecture
 import android.content.Context
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
+import android.text.style.CharacterStyle
+import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
@@ -37,6 +39,22 @@ class ShowMoreTextViewTest {
         assertEquals(2, amountLines)
         assertTrue(showMoreTextView.isExpanded)
         assertEquals(context.getColor(R.color.background_ads), colorClickableText)
+    }
+
+    @Test
+    fun `test set spannable show more text with extra text`() {
+
+        val showMoreTextView = ShowMoreTextView(context, null)
+        showMoreTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit... Ver mas"
+        showMoreTextView.extraText = "30/07/2020"
+
+        val showMoreListenerMethod = ShowMoreTextView::class.java.getDeclaredMethod("getSpannableShowMore", String::class.java)
+        showMoreListenerMethod.isAccessible = true
+        val spannableShowMore = showMoreListenerMethod.invoke(showMoreTextView, showMoreTextView.text) as SpannableStringBuilder
+
+        val spans = spannableShowMore.getSpans(0, showMoreTextView.text.length, Any::class.java)
+        assertEquals(1, spans.size)
+        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit... Ver mas   30/07/2020", spannableShowMore.toString())
     }
 
     @Test
