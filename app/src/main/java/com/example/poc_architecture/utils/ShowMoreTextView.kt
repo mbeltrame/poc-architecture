@@ -158,8 +158,9 @@ class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextVi
     private fun getSpanExtraText(): SpannableStringBuilder? {
         return extraText?.let {
             val textSize = context.resources.getDimensionPixelSize(R.dimen.text_size_show_more)
-            val spannableString = SpannableStringBuilder(SPAN_SEPARATOR)
-            spannableString.append(SpannableString(it.toSpannableString(context, textSize)))
+            val spannableString = SpannableStringBuilder(SPAN_SEPARATOR.toSpannableString(size = textSize))
+            val color = getColor(context, R.color.colorPrimary)
+            spannableString.append(SpannableString(it.toSpannableString(color = color)))
         }
     }
 
