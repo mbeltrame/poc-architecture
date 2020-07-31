@@ -1,10 +1,9 @@
 package com.example.poc_architecture
 
 import android.content.Context
+import android.text.Layout
 import android.text.SpannableStringBuilder
 import android.text.style.AbsoluteSizeSpan
-import android.text.style.CharacterStyle
-import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
@@ -12,6 +11,7 @@ import com.example.poc_architecture.utils.ShowMoreTextView
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
+import org.mockito.Mockito.*
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.util.ReflectionHelpers
 
@@ -48,13 +48,20 @@ class ShowMoreTextViewTest {
         showMoreTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit... Ver mas"
         showMoreTextView.extraText = "30/07/2020"
 
-        val showMoreListenerMethod = ShowMoreTextView::class.java.getDeclaredMethod("getSpannableShowMore", String::class.java)
+        val showMoreListenerMethod =
+            ShowMoreTextView::class.java.getDeclaredMethod("getSpannableText", String::class.java)
         showMoreListenerMethod.isAccessible = true
-        val spannableShowMore = showMoreListenerMethod.invoke(showMoreTextView, showMoreTextView.text) as SpannableStringBuilder
+        val spannableShowMore = showMoreListenerMethod.invoke(
+            showMoreTextView,
+            showMoreTextView.text
+        ) as SpannableStringBuilder
 
         val spans = spannableShowMore.getSpans(0, showMoreTextView.text.length, Any::class.java)
         assertEquals(1, spans.size)
-        assertEquals("Lorem ipsum dolor sit amet, consectetur adipiscing elit... Ver mas   30/07/2020", spannableShowMore.toString())
+        assertEquals(
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit... Ver mas   30/07/2020",
+            spannableShowMore.toString()
+        )
     }
 
     @Test
@@ -73,8 +80,14 @@ class ShowMoreTextViewTest {
 
         assertEquals("   30/07/2020", extraText.toString())
         assertEquals(2, spans.size)
-        assertEquals(ContextCompat.getColor(context, R.color.colorPrimary), dateColor.foregroundColor)
-        assertEquals(context.resources.getDimensionPixelSize(R.dimen.text_size_show_more), spanSize.size)
+        assertEquals(
+            ContextCompat.getColor(context, R.color.colorPrimary),
+            dateColor.foregroundColor
+        )
+        assertEquals(
+            context.resources.getDimensionPixelSize(R.dimen.text_size_show_more),
+            spanSize.size
+        )
     }
 
     @Test
@@ -87,6 +100,40 @@ class ShowMoreTextViewTest {
         showMoreTextView.updateView(true)
 
         assertEquals("Lorem ipsum dolor sit amet   30/07/2020", showMoreTextView.text.toString())
+    }
+
+    @Test
+    fun `test append show more text with amount lines mayor than line count`() {
+
+        val showMoreTextView = ShowMoreTextView(context, null)
+        showMoreTextView.text = "Lorem ipsum dolor"
+        showMoreTextView.extraText = "30/07/2020"
+        ReflectionHelpers.setField(showMoreTextView, "amountLines", 2)
+
+        val onAppendShowMoreText =
+            ShowMoreTextView::class.java.getDeclaredMethod("appendShowMoreText")
+        onAppendShowMoreText.isAccessible = true
+        onAppendShowMoreText.invoke(showMoreTextView)
+
+        assertEquals("Lorem ipsum dolor   30/07/2020", showMoreTextView.text.toString())
+    }
+
+    @Test
+    fun `test append show more text with amount lines minor than line count`() {
+
+        val showMoreTextView = mock(ShowMoreTextView::class.java)
+        `when`(showMoreTextView.text).thenReturn("Lorem ipsum dolor sit amet, consectetur adipiscing elit")
+        `when`(showMoreTextView.layout).thenReturn(mock(Layout::class.java))
+        `when`(showMoreTextView.layout.getLineEnd(anyInt())).thenReturn("Lorem ipsum dolor sit amet, consectetur adipiscing elit".length)
+        `when`(showMoreTextView.lineCount).thenReturn(2)
+        ReflectionHelpers.setField(showMoreTextView, "amountLines", 1)
+        ReflectionHelpers.setField(showMoreTextView, "textShowMore", "Show more")
+
+        showMoreTextView.appendShowMoreText()
+        val auxText = ReflectionHelpers.getField<String>(showMoreTextView, "auxText")
+
+        assertNotNull(showMoreTextView.layout)
+        assertEquals("Lorem ipsum dolor sit amet, consectetur ad... Show more", auxText)
     }
 
     @Test
