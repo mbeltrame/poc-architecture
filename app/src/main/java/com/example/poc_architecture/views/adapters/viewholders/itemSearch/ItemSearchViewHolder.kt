@@ -7,7 +7,7 @@ import com.example.poc_architecture.R
 import com.example.poc_architecture.models.ComponentDTO
 import com.example.poc_architecture.models.ItemSearchComponentDTO
 import com.example.poc_architecture.utils.ICallbackShowMore
-import com.example.poc_architecture.utils.ShowMoreTextView
+import com.example.poc_architecture.views.custom.ShowMoreTextView
 import com.example.poc_architecture.utils.ViewMode
 import com.example.poc_architecture.views.IListenerUpdate
 import com.example.poc_architecture.views.adapters.viewholders.ComponentsViewHolder

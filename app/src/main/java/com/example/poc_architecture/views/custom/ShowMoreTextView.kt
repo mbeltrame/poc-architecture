@@ -1,4 +1,4 @@
-package com.example.poc_architecture.utils
+package com.example.poc_architecture.views.custom
 
 import android.content.Context
 import android.text.SpannableString
@@ -15,7 +15,10 @@ import androidx.core.content.ContextCompat.getColor
 import com.example.poc_architecture.R
 import com.example.poc_architecture.R.styleable
 import com.example.poc_architecture.R.styleable.*
+import com.example.poc_architecture.utils.ICallbackShowMore
 import com.example.poc_architecture.utils.TransitionType.CHANGE_BOUNDS
+import com.example.poc_architecture.utils.TransitionUtils
+import com.example.poc_architecture.utils.toSpannableString
 
 open class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatTextView(context, attrs) {
 
@@ -33,9 +36,13 @@ open class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatT
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, styleable.ShowMoreTextView)
-        amountLines = typedArray.getInt(ShowMoreTextView_amountLines, DEFAULT_AMOUNT_LINES)
+        amountLines = typedArray.getInt(ShowMoreTextView_amountLines,
+            DEFAULT_AMOUNT_LINES
+        )
         thresholdActivation =
-            typedArray.getInt(ShowMoreTextView_thresholdActivation, DEFAULT_THRESHOLD_ACTIVATION)
+            typedArray.getInt(ShowMoreTextView_thresholdActivation,
+                DEFAULT_THRESHOLD_ACTIVATION
+            )
         textShowMore = typedArray.getString(ShowMoreTextView_showMoreText) ?: "Show more"
         colorClickableText = typedArray.getColor(
             ShowMoreTextView_colorClickableText,
@@ -144,7 +151,10 @@ open class ShowMoreTextView(context: Context, attrs: AttributeSet?) : AppCompatT
                 override fun onClick(view: View?) {
                     setExpanded()
                     val container = parent.parent as? ViewGroup
-                    TransitionUtils.showTransition(container, CHANGE_BOUNDS)
+                    TransitionUtils.showTransition(
+                        container,
+                        CHANGE_BOUNDS
+                    )
                     iCallbackShowMore?.onClickSeeMore(position)
                 }
             },

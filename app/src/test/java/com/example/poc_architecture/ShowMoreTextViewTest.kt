@@ -7,7 +7,7 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.ForegroundColorSpan
 import androidx.core.content.ContextCompat
 import androidx.test.core.app.ApplicationProvider
-import com.example.poc_architecture.utils.ShowMoreTextView
+import com.example.poc_architecture.views.custom.ShowMoreTextView
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +24,11 @@ class ShowMoreTextViewTest {
     @Test
     fun `test default values`() {
 
-        val showMoreTextView = ShowMoreTextView(context, null)
+        val showMoreTextView =
+            ShowMoreTextView(
+                context,
+                null
+            )
 
         val text = ReflectionHelpers.getField<String>(showMoreTextView, "textShowMore")
         val threshold = ReflectionHelpers.getField<Int>(showMoreTextView, "thresholdActivation")
@@ -44,7 +48,11 @@ class ShowMoreTextViewTest {
     @Test
     fun `test set spannable show more text with extra text`() {
 
-        val showMoreTextView = ShowMoreTextView(context, null)
+        val showMoreTextView =
+            ShowMoreTextView(
+                context,
+                null
+            )
         showMoreTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit... Ver mas"
         showMoreTextView.extraText = "30/07/2020"
 
@@ -67,7 +75,11 @@ class ShowMoreTextViewTest {
     @Test
     fun `test get extra text`() {
 
-        val showMoreTextView = ShowMoreTextView(context, null)
+        val showMoreTextView =
+            ShowMoreTextView(
+                context,
+                null
+            )
         showMoreTextView.extraText = "30/07/2020"
 
         val onGetExtraTextMethod =
@@ -93,7 +105,11 @@ class ShowMoreTextViewTest {
     @Test
     fun `test extra text added to main text`() {
 
-        val showMoreTextView = ShowMoreTextView(context, null)
+        val showMoreTextView =
+            ShowMoreTextView(
+                context,
+                null
+            )
         showMoreTextView.text = "Lorem ipsum dolor sit amet"
         showMoreTextView.extraText = "30/07/2020"
 
@@ -105,7 +121,11 @@ class ShowMoreTextViewTest {
     @Test
     fun `test append show more text with amount lines mayor than line count`() {
 
-        val showMoreTextView = ShowMoreTextView(context, null)
+        val showMoreTextView =
+            ShowMoreTextView(
+                context,
+                null
+            )
         showMoreTextView.text = "Lorem ipsum dolor"
         showMoreTextView.extraText = "30/07/2020"
         ReflectionHelpers.setField(showMoreTextView, "amountLines", 2)
@@ -139,7 +159,11 @@ class ShowMoreTextViewTest {
     @Test
     fun `test update view expanded`() {
 
-        val showMoreTextView = ShowMoreTextView(context, null)
+        val showMoreTextView =
+            ShowMoreTextView(
+                context,
+                null
+            )
         showMoreTextView.text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
 
         showMoreTextView.updateView(false)
