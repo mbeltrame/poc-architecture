@@ -18,9 +18,7 @@ import com.example.poc_architecture.models.HighlightDeal
 import com.example.poc_architecture.models.Label
 import kotlinx.android.synthetic.main.highlight_layout.view.*
 
-
-class HighlightView(context: Context, attrs: AttributeSet? = null) :
-    FrameLayout(context, attrs) {
+class HighlightView(context: Context, attrs: AttributeSet? = null) : FrameLayout(context, attrs) {
 
     private var tvAux: TextView
 
@@ -35,18 +33,14 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) :
 
         val listViews = ArrayList<TextView>()
 
-        viewTreeObserver.addOnGlobalLayoutListener(object :
-            ViewTreeObserver.OnGlobalLayoutListener {
+        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
             override fun onGlobalLayout() {
                 viewTreeObserver.removeOnGlobalLayoutListener(this)
 
                 var i = 0
                 while (i < tvAux.lineCount) {
                     tvAux.layout?.let {
-                        val string = tvAux.text.subSequence(
-                            it.getLineStart(i),
-                            it.getLineEnd(i)
-                        )
+                        val string = tvAux.text.subSequence(it.getLineStart(i), it.getLineEnd(i))
 
                         val textView = createTextView(string, i, highlight)
                         listViews.add(textView)
@@ -65,14 +59,8 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) :
     private fun setAuxTexView(highlight: HighlightDeal) {
         tvAux.text = highlight.label?.text
         if (highlight.iconId != null) {
-            tvAux.setCompoundDrawables(
-                ContextCompat.getDrawable(context, R.drawable.ic_test),
-                null,
-                null,
-                null
-            )
-            tvAux.compoundDrawablePadding =
-                resources.getDimensionPixelOffset(R.dimen.padding_drawable)
+            tvAux.setCompoundDrawables(ContextCompat.getDrawable(context, R.drawable.ic_test), null, null, null)
+            tvAux.compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.padding_drawable)
         }
     }
 
@@ -87,32 +75,19 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) :
         textView.gravity = Gravity.CENTER
         textView.setTextColor(Color.parseColor(highlight.label?.color))
         if (position == 0 && highlight.iconId != null) {
-            textView.setCompoundDrawablesWithIntrinsicBounds(
-                getDrawableByName(highlight.iconId!!),
-                null,
-                null,
-                null
-            )
-            textView.compoundDrawablePadding =
-                resources.getDimensionPixelOffset(R.dimen.padding_drawable)
+            textView.setCompoundDrawablesWithIntrinsicBounds(getDrawableByName(highlight.iconId!!), null, null, null)
+            textView.compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.padding_drawable)
         }
         return textView
     }
 
     private fun getDrawableByName(name: String): Drawable? {
         val resources: Resources = context.resources
-        val resourceId: Int = resources.getIdentifier(
-            name, "drawable",
-            context.packageName
-        )
+        val resourceId: Int = resources.getIdentifier(name, "drawable", context.packageName)
         return ContextCompat.getDrawable(context, resourceId)
     }
 
     private fun createHighlights(): HighlightDeal {
-        return HighlightDeal(
-            Label("NUEVO ALSJDLASKJDLA ALKSJD LASKD JALSKD A", "#FFFFFF", "#3483FA"),
-            "ic_test",
-            null
-        )
+        return HighlightDeal(Label("NUEVO ALSJDLASKJDLA ALKSJD LASKD JALSKD A", "#FFFFFF", "#3483FA"), "ic_test", null)
     }
 }
