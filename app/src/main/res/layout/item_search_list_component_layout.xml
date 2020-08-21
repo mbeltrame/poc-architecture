@@ -35,7 +35,12 @@
                 app:amountLines="2"
                 app:showMoreText="Ver mas"
                 tools:text="LIST ITEM SEARCH" />
+
         </LinearLayout>
+
+        <com.example.poc_architecture.views.custom.HighlightView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
 
         <Button
             android:id="@+id/btn_update"

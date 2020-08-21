@@ -27,8 +27,12 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:padding="12dp"
-            app:thresholdActivation="0"
             android:textColor="@android:color/white"
+            app:thresholdActivation="0"
             tools:text="GRID ITEM SEARCH" />
+
+        <com.example.poc_architecture.views.custom.HighlightView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
     </LinearLayout>
 </androidx.cardview.widget.CardView>
