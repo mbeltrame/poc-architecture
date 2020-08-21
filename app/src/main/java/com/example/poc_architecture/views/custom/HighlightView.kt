@@ -3,6 +3,7 @@ package com.example.poc_architecture.views.custom
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Color
+import android.graphics.PorterDuff
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.Gravity
@@ -75,19 +76,16 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) :
         }
     }
 
-    private fun createTextView(
-        string: CharSequence,
-        position: Int,
-        highlight: HighlightDeal
-    ): TextView {
+    private fun createTextView(string: CharSequence, position: Int, highlight: HighlightDeal): TextView {
         val textView = TextView(context)
         textView.layoutParams = LayoutParams(WRAP_CONTENT, WRAP_CONTENT).apply {
             bottomMargin = resources.getDimensionPixelOffset(R.dimen.bottom_margin)
         }
         textView.background = ContextCompat.getDrawable(context, R.drawable.background_peel)
+        textView.background.setColorFilter(Color.parseColor(highlight.label?.background), PorterDuff.Mode.SRC_ATOP)
         textView.text = string
         textView.gravity = Gravity.CENTER
-        textView.setTextColor(Color.WHITE)
+        textView.setTextColor(Color.parseColor(highlight.label?.color))
         if (position == 0 && highlight.iconId != null) {
             textView.setCompoundDrawablesWithIntrinsicBounds(
                 getDrawableByName(highlight.iconId!!),
@@ -112,7 +110,7 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) :
 
     private fun createHighlights(): HighlightDeal {
         return HighlightDeal(
-            Label("NUEVO ALSJDLASKJDLA ALKSJD LASKD JALSKD A", "FFF", "000"),
+            Label("NUEVO ALSJDLASKJDLA ALKSJD LASKD JALSKD A", "#FFFFFF", "#3483FA"),
             "ic_test",
             null
         )
