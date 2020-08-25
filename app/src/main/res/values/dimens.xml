@@ -6,4 +6,8 @@
     <dimen name="bottom_margin">1dp</dimen>
     <dimen name="padding_drawable">4dp</dimen>
     <dimen name="padding_drawable_2">14dp</dimen>
+    <dimen name="highlight_view_padding_drawable">4dp</dimen>
+    <dimen name="highlight_view_drawable_width">20dp</dimen>
+    <dimen name="highlight_view_drawable_height">20dp</dimen>
+    <dimen name="highlight_view_text_size_default">10sp</dimen>
 </resources>

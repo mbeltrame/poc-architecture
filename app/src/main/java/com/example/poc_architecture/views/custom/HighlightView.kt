@@ -1,11 +1,10 @@
 package com.example.poc_architecture.views.custom
 
 import android.content.Context
-import android.content.res.Resources
 import android.graphics.Color
 import android.graphics.PorterDuff
-import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
@@ -16,15 +15,20 @@ import androidx.core.content.ContextCompat
 import com.example.poc_architecture.R
 import com.example.poc_architecture.models.HighlightDeal
 import com.example.poc_architecture.models.Label
+import com.example.poc_architecture.utils.setLeftDrawable
 import kotlinx.android.synthetic.main.highlight_layout.view.*
 
 class HighlightView(context: Context, attrs: AttributeSet? = null) : FrameLayout(context, attrs) {
 
     private var tvAux: TextView
+    private var textSize: Float
 
     init {
         LayoutInflater.from(context).inflate(R.layout.highlight_layout, this, true)
         tvAux = findViewById(R.id.tv_aux)
+        val typedArray = context.obtainStyledAttributes(attrs, R.styleable.HighlightView)
+        textSize = typedArray.getDimension(R.styleable.HighlightView_text_size, context.resources.getDimension(R.dimen.highlight_view_text_size_default))
+        typedArray?.recycle()
         createLayout(createHighlights())
     }
 
@@ -58,10 +62,7 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) : FrameLayout
 
     private fun setAuxTexView(highlight: HighlightDeal) {
         tvAux.text = highlight.label?.text
-        if (highlight.iconId != null) {
-            tvAux.setCompoundDrawables(ContextCompat.getDrawable(context, R.drawable.ic_test), null, null, null)
-            tvAux.compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.padding_drawable)
-        }
+        tvAux.setLeftDrawable(0, highlight.iconId)
     }
 
     private fun createTextView(string: CharSequence, position: Int, highlight: HighlightDeal): TextView {
@@ -73,18 +74,10 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) : FrameLayout
         textView.background.setColorFilter(Color.parseColor(highlight.label?.background), PorterDuff.Mode.SRC_ATOP)
         textView.text = string
         textView.gravity = Gravity.CENTER
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_PX, textSize)
         textView.setTextColor(Color.parseColor(highlight.label?.color))
-        if (position == 0 && highlight.iconId != null) {
-            textView.setCompoundDrawablesWithIntrinsicBounds(getDrawableByName(highlight.iconId!!), null, null, null)
-            textView.compoundDrawablePadding = resources.getDimensionPixelOffset(R.dimen.padding_drawable)
-        }
+        textView.setLeftDrawable(position, highlight.iconId)
         return textView
-    }
-
-    private fun getDrawableByName(name: String): Drawable? {
-        val resources: Resources = context.resources
-        val resourceId: Int = resources.getIdentifier(name, "drawable", context.packageName)
-        return ContextCompat.getDrawable(context, resourceId)
     }
 
     private fun createHighlights(): HighlightDeal {
