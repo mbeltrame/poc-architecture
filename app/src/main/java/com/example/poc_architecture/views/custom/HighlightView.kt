@@ -7,6 +7,7 @@ import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.Gravity
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.view.ViewTreeObserver
 import android.widget.FrameLayout
@@ -14,7 +15,6 @@ import android.widget.TextView
 import androidx.core.content.ContextCompat
 import com.example.poc_architecture.R
 import com.example.poc_architecture.models.HighlightDeal
-import com.example.poc_architecture.models.Label
 import com.example.poc_architecture.utils.setLeftDrawable
 import kotlinx.android.synthetic.main.highlight_layout.view.*
 
@@ -29,35 +29,37 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) : FrameLayout
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.HighlightView)
         textSize = typedArray.getDimension(R.styleable.HighlightView_text_size, context.resources.getDimension(R.dimen.highlight_view_text_size_default))
         typedArray?.recycle()
-        createLayout(createHighlights())
     }
 
-    private fun createLayout(highlight: HighlightDeal) {
-        setAuxTexView(highlight)
+    fun bindLayout(highlightDeal: HighlightDeal?) {
+        highlightDeal?.let { highlight ->
 
-        val listViews = ArrayList<TextView>()
+            setAuxTexView(highlight)
+            val listViews = ArrayList<TextView>()
+            addOnLayoutChangeListener(object : OnLayoutChangeListener {
+                override fun onLayoutChange(v: View?, left: Int, top: Int, right: Int, bottom: Int, oldLeft: Int, oldTop: Int, oldRight: Int, oldBottom: Int) {
+                    if (container_highlight.childCount == 0) {
+                        var i = 0
+                        while (i < tvAux.lineCount) {
+                            tvAux.layout?.let {
+                                val string = tvAux.text.subSequence(it.getLineStart(i), it.getLineEnd(i))
 
-        viewTreeObserver.addOnGlobalLayoutListener(object : ViewTreeObserver.OnGlobalLayoutListener {
-            override fun onGlobalLayout() {
-                viewTreeObserver.removeOnGlobalLayoutListener(this)
-
-                var i = 0
-                while (i < tvAux.lineCount) {
-                    tvAux.layout?.let {
-                        val string = tvAux.text.subSequence(it.getLineStart(i), it.getLineEnd(i))
-
-                        val textView = createTextView(string, i, highlight)
-                        listViews.add(textView)
+                                val textView = createTextView(string, i, highlight)
+                                listViews.add(textView)
+                            }
+                            i++
+                        }
+                        listViews.forEach {
+                            container_highlight.addView(it)
+                        }
+                        if (container_highlight.childCount > 0) {
+                            container_highlight.visibility = VISIBLE
+                        }
                     }
-                    i++
+                    removeOnLayoutChangeListener(this)
                 }
-                listViews.forEach {
-                    container_highlight.addView(it)
-                }
-            }
-        })
-
-        container_highlight.visibility = VISIBLE
+            })
+        }
     }
 
     private fun setAuxTexView(highlight: HighlightDeal) {
@@ -78,9 +80,5 @@ class HighlightView(context: Context, attrs: AttributeSet? = null) : FrameLayout
         textView.setTextColor(Color.parseColor(highlight.label?.color))
         textView.setLeftDrawable(position, highlight.iconId)
         return textView
-    }
-
-    private fun createHighlights(): HighlightDeal {
-        return HighlightDeal(Label("NUEVO ALSJDLASKJDLA ALKSJD LASKD JALSKD A", "#FFFFFF", "#3483FA"), "ic_test", null)
     }
 }

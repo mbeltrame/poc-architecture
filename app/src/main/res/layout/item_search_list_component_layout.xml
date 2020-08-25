@@ -39,6 +39,7 @@
         </LinearLayout>
 
         <com.example.poc_architecture.views.custom.HighlightView
+            android:id="@+id/highlight_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
 

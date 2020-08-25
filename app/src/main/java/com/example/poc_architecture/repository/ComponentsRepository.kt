@@ -6,6 +6,10 @@ import com.example.poc_architecture.utils.ViewType.*
 class ComponentsRepository {
 
     companion object {
+
+        private fun createHighlights(): HighlightDeal {
+            return HighlightDeal(Label("NUEVO ALSJDLASKJDLA ALKSJD LASKD JALSKD A", "#FFFFFF", "#3483FA"), "ic_test", null)
+        }
         fun fetchComponents(): List<ComponentDTO> {
             val components = ArrayList<ComponentDTO>()
 
@@ -13,6 +17,7 @@ class ComponentsRepository {
                 val itemSearchComponentDTO = ItemSearchComponentDTO("ITEM SEACH ALSK D ALSK DLAKS DL AKS AKS DL A KS DALKSD ALKSD LAKSD DKS DLADKALSKD ALSK $i")
                 itemSearchComponentDTO.id = ITEM_SEARCH.toString()
                 itemSearchComponentDTO.state = "VISIBLE"
+                itemSearchComponentDTO.highlightDeal = createHighlights()
                 components.add(itemSearchComponentDTO)
             }
 
@@ -48,5 +53,6 @@ class ComponentsRepository {
             components.add(carouselComponentDTO2)
             return components
         }
+
     }
 }
