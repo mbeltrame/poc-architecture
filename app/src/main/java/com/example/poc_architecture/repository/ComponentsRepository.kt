@@ -9,7 +9,7 @@ class ComponentsRepository {
         fun fetchComponents(): List<ComponentDTO> {
             val components = ArrayList<ComponentDTO>()
 
-            for (i in 1..4) {
+            for (i in 1..10) {
                 val itemSearchComponentDTO = ItemSearchComponentDTO("ITEM SEACH ALSK D ALSK DLAKS DL AKS AKS DL A KS DALKSD ALKSD LAKSD DKS DLADKALSKD ALSK $i")
                 itemSearchComponentDTO.id = ITEM_SEARCH.toString()
                 itemSearchComponentDTO.state = "VISIBLE"
