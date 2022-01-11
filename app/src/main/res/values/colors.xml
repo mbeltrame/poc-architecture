@@ -6,5 +6,6 @@
     <color name="background_carousel">#4DB6AC</color>
     <color name="background_item_search">#E57373</color>
     <color name="background_ads">#64B5F6</color>
-    <color name="background_image">#6F7880</color>
+    <color name="background_image">#F2F2F2</color>
+    <color name="white">#FFFFFF</color>
 </resources>

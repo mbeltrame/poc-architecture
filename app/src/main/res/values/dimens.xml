@@ -10,4 +10,6 @@
     <dimen name="highlight_view_drawable_width">20dp</dimen>
     <dimen name="highlight_view_drawable_height">20dp</dimen>
     <dimen name="highlight_view_text_size_default">10sp</dimen>
+    <dimen name="elevation">4dp</dimen>
+    <dimen name="radius">8dp</dimen>
 </resources>
